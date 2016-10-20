@@ -1,0 +1,11 @@
+csharp-example/csharp-example/bin/
+csharp-example/csharp-example/obj/
+csharp-example/packages/
+java-example/build/
+js-example/node_modules/
+python-example/.cache/
+geckodriver.log
+java-example/.gradle/
+csharp-example/.vs/
+.idea/workspace.xml
+.idea/runConfigurations/

@@ -1,0 +1,23 @@
+group 'ru.stqa'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+    compile 'org.seleniumhq.selenium:selenium-java:3.0.0'
+}
+
+test {
+    //maxParallelForks = 10
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
