@@ -2,7 +2,6 @@
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.IE;
 using OpenQA.Selenium.Support.UI;
 
 namespace csharp_example
@@ -16,7 +15,7 @@ namespace csharp_example
         [SetUp]
         public void start()
         {
-            driver = new InternetExplorerDriver();
+            driver = new ChromeDriver();
             wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
         }
 
@@ -24,6 +23,7 @@ namespace csharp_example
         public void FirstTest ()
         {
             driver.Url = "http://www.google.com/";
+            IWebElement element = wait.Until(d => d.FindElement(By.Name("q")));
             driver.FindElement(By.Name("q")).SendKeys("webdriver");
             driver.FindElement(By.Name("btnG")).Click();
             wait.Until(ExpectedConditions.TitleIs("webdriver - Поиск в Google"));

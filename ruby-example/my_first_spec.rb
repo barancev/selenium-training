@@ -1,12 +1,9 @@
 require 'rspec'
 require 'selenium-webdriver'
-require 'pp'
 
 describe 'Google search' do
   before(:each) do
-    Selenium::WebDriver::Firefox::Binary.path = "c:\\Program Files (x86)\\Nightly\\firefox.exe"
-    @driver = Selenium::WebDriver.for(:firefox)
-    puts PP.pp(@driver.capabilities)
+    @driver = Selenium::WebDriver.for(:chrome)
     @wait = Selenium::WebDriver::Wait.new(:timeout => 10)
   end
 

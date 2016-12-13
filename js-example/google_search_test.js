@@ -17,11 +17,10 @@
 
 /**
  * @fileoverview An example test that may be run using Mocha.
- * Usage: mocha -t 10000 selenium-webdriver/example/google_search_test.js
+ * Usage: mocha -t 10000 google_search_test.js
  */
 
 var webdriver = require('selenium-webdriver'),
-    chrome = require('selenium-webdriver/chrome'),
     By = webdriver.By,
     until = webdriver.until,
     test = require('selenium-webdriver/testing');
@@ -30,23 +29,21 @@ test.describe('Google Search', function() {
   var driver;
 
   test.before(function() {
-    var options = new chrome.Options();
-    options.addArguments(["start-fullscreen"]);
-
     driver = new webdriver.Builder()
-        .forBrowser('chrome')
-        .setChromeOptions(options)
+        .forBrowser("chrome")
         .build();
-    driver.getCapabilities().then(function(caps) {
-      console.log(caps);
-    });
   });
 
   test.it('should append query to title', function() {
     driver.get('http://www.google.com');
-    driver.findElement(By.name('q')).sendKeys('webdriver');
-    driver.findElement(By.name('btnG')).click();
-    driver.wait(until.titleIs('webdriver - Поиск в Google'), 1000);
+
+     driver.wait(until.elementLocated(By.name('q')), 10000/*ms*/).then(function() {
+       driver.findElement(By.name('q')).sendKeys('webdriver').then(function() {
+         driver.findElement(By.name('btnG')).click().then(function(){
+           driver.wait(until.titleIs('webdriver - Поиск в Google'), 1000);
+         });
+       });
+     });
   });
 
   test.after(function() {
